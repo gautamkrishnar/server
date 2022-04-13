@@ -428,7 +428,7 @@ class Cache implements ICache {
 	protected function normalizeData(array $data): array {
 		$fields = [
 			'path', 'parent', 'name', 'mimetype', 'size', 'mtime', 'storage_mtime', 'encrypted',
-			'etag', 'permissions', 'checksum', 'storage'];
+			'etag', 'permissions', 'checksum', 'storage', 'unencrypted_size'];
 		$extensionFields = ['metadata_etag', 'creation_time', 'upload_time'];
 
 		$doNotCopyStorageMTime = false;

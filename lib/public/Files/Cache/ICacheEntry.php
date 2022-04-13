@@ -162,4 +162,14 @@ interface ICacheEntry extends ArrayAccess {
 	 * @since 18.0.0
 	 */
 	public function getUploadTime(): ?int;
+
+	/**
+	 * Get the unencrypted size
+	 *
+	 * this might be different from the result of getSize
+	 *
+	 * @return int
+	 * @since 24.0.0
+	 */
+	public function getUnencryptedSize(): int;
 }
