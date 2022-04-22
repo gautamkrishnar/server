@@ -33,25 +33,18 @@ class FakeDBLockingProvider extends \OC\Lock\DBLockingProvider {
 
 	/**
 	 * Need a new child, because parent::connection is private instead of protected...
-	 * @var IDBConnection
 	 */
-	protected $db;
+	protected IDBConnection $db;
 
 	public function __construct(
 		IDBConnection $connection,
-		LoggerInterface $logger,
 		ITimeFactory $timeFactory
 	) {
-		parent::__construct($connection, $logger, $timeFactory);
+		parent::__construct($connection, $timeFactory);
 		$this->db = $connection;
 	}
 
-
-	/**
-	 * @param string $path
-	 * @param int $type self::LOCK_SHARED or self::LOCK_EXCLUSIVE
-	 */
-	public function releaseLock(string $path, int $type) {
+	public function releaseLock(string $path, int $type): void {
 		// we DONT keep shared locks till the end of the request
 		if ($type === self::LOCK_SHARED) {
 			$this->db->executeUpdate(
